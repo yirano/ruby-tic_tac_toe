@@ -4,7 +4,8 @@ class Game
     @p2 = p2
     self.set_player
     @arr = []
-    @curr_player == 2
+    @curr_player = 1
+    @used_grids = []    
   end
 
   def board
@@ -36,29 +37,36 @@ class Game
     puts
     puts "Pick a grid to play by inputting the number you see. \nIf the grid has been played, you cannot play that again!"
     puts
-
-    
   end
 
   def play
     ct = 0
     while ct < 9
+      puts
       print "Play a grid! > "
-      puts
       grid_picked = gets.chomp
-
-      if @curr_player == 1
-        @arr[grid_picked.to_i - 1] = " [ ".blue + "X".yellow + " ] ".blue
-        @curr_player = 2
+      grid_picked = grid_picked.to_i      
+      if @used_grids.include? grid_picked
+        puts
+        puts "That grid been played already! Pick another one"
       else
-        @arr[grid_picked.to_i - 1] = " [ ".blue + "O".red + " ] ".blue
-        @curr_player = 1
+        @used_grids.push(grid_picked)
+        if grid_picked < 10 && grid_picked > 0
+          if @curr_player == 1
+            @arr[grid_picked.to_i - 1] = " [ ".blue + "X".yellow + " ] ".blue
+            @curr_player = 2
+          else
+            @arr[grid_picked.to_i - 1] = " [ ".blue + "O".red + " ] ".blue
+            @curr_player = 1
+          end
+          ct+=1
+          puts
+          puts @arr.each_slice(3) { |x| puts x.join puts }
+        else
+          puts
+          puts "You must input a number between 1 and 9!"
+        end
       end
-
-      puts
-
-      ct+=1
-      puts @arr.each_slice(3) { |x| puts x.join puts }
     end
   end
 
