@@ -9,7 +9,7 @@ class Game
   end
 
   def board
-    # arr = [];
+    # >>> This creates the board and marks every grid with a number 1 - 9
     for i in 1..9
       @arr.push(" [ ".blue + i.to_s.light_blue + " ] ".blue).each_slice(3)
     end
@@ -31,8 +31,10 @@ class Game
     p2 = Player.new(inp)
     puts
     # LOOP ENDS HERE
+
+    # >>> This just gives the names their color
     p1_name = p1.name.yellow
-    p2_name = p2.name.green
+    p2_name = p2.name.red
     puts "All right! Let's play #{p1_name} and #{p2_name}!"
     puts
     puts "Pick a grid to play by inputting the number you see. \nIf the grid has been played, you cannot play that again!"
@@ -42,15 +44,21 @@ class Game
   def play
     ct = 0
     while ct < 9
+
+      # >>> Asks the player to pick a number for a grid they'd like to play
       puts
       print "Play a grid! > "
       grid_picked = gets.chomp
-      grid_picked = grid_picked.to_i      
+      grid_picked = grid_picked.to_i
+      
+      # >>> This restricts a player from playing a grid that has already been filled.
       if @used_grids.include? grid_picked
         puts
         puts "That grid been played already! Pick another one"
       else
         @used_grids.push(grid_picked)
+
+        # >>> This makes sure the input is a number from 1 - 9
         if grid_picked < 10 && grid_picked > 0
           if @curr_player == 1
             @arr[grid_picked.to_i - 1] = " [ ".blue + "X".yellow + " ] ".blue
