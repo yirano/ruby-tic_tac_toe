@@ -37,6 +37,7 @@ class Game
 
         # >>> This makes sure the input is a number from 1 - 9
         if grid_picked < 10 && grid_picked > 0
+          # >>> Switches players after each round
           if @curr_player == 1
             @arr[grid_picked.to_i - 1] = " [ ".blue + "X".yellow + " ] ".blue
             @player_one_grid.push(grid_picked)
@@ -60,12 +61,15 @@ class Game
   end
 
   def did_win
+    # >>> Compares each user's grids played to the winning pattern.
     for i in 0...@winning_patterns.length
       if (@winning_patterns[i]-@player_one_grid).empty? == true
+        puts
         puts "PLAYER ONE YOU JUST WON!"
         puts @arr.each_slice(3) { |x| puts x.join puts }
         exit
       elsif (@winning_patterns[i]-@player_two_grid).empty?
+        puts
         puts "PLAYER TWO YOU WON!!!"
         puts @arr.each_slice(3) { |x| puts x.join puts }
         exit
