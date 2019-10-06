@@ -15,4 +15,4 @@ You can check out the live code by clicking [here](https://repl.it/@yirano/Tic-T
 Distributed under the MIT License. See [LICENSE](https://github.com/yirano/tic-tac-toe/blob/gameplay/LICENSE) for more information.
 
 ## Authors
-Tiffany Arellano - [Github](https://github.com/yirano) | [LinkedIn](https://www.linkedin.com/in/yt-arellano/) | [Twitter](https://twitter.com/yiirano)
+Tiffany Arellano - [Github](https://github.com/yirano) | [LinkedIn](https://www.linkedin.com/in/yt-arellano/) | [Twitter](https://twitter.com/yiirano) | [repl.it](https://repl.it/@yirano)
