@@ -4,7 +4,9 @@ class Game
     @curr_player = 1
     @used_grids = []
     @set_player = Player.new(nil)
-    # self.board
+    @player_one_grid = []
+    @player_two_grid = []
+    @winning_patterns = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
   end
   
   def board
@@ -35,12 +37,17 @@ class Game
 
         # >>> This makes sure the input is a number from 1 - 9
         if grid_picked < 10 && grid_picked > 0
+          # >>> Switches players after each round
           if @curr_player == 1
             @arr[grid_picked.to_i - 1] = " [ ".blue + "X".yellow + " ] ".blue
+            @player_one_grid.push(grid_picked)
             @curr_player = 2
+            self.did_win
           else
             @arr[grid_picked.to_i - 1] = " [ ".blue + "O".red + " ] ".blue
+            @player_two_grid.push(grid_picked)
             @curr_player = 1
+            self.did_win
           end
           ct+=1
           puts
@@ -53,13 +60,21 @@ class Game
     end
   end
 
-  def game_over
-    if bool == true
+  def did_win
+    # >>> Compares each user's grids played to the winning pattern.
+    for i in 0...@winning_patterns.length
+      if (@winning_patterns[i]-@player_one_grid).empty? == true
+        puts
+        puts "PLAYER ONE YOU JUST WON!"
+        puts @arr.each_slice(3) { |x| puts x.join puts }
+        exit
+      elsif (@winning_patterns[i]-@player_two_grid).empty?
+        puts
+        puts "PLAYER TWO YOU WON!!!"
+        puts @arr.each_slice(3) { |x| puts x.join puts }
+        exit
+      end
     end
-  end
-
-  def winner?
-    "Congratulations!"
   end
 end
 
